@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  password:
+
+development:
+  <<: *default
+  database: sightseer_development
+  username: ubuntu
+
+test:
+  <<: *default
+  database: sightseer_test
+  username: ubuntu
+
+production:
+  <<: *default
+  database: sightseer_production
+  username: tomlee
