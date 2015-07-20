@@ -15,7 +15,6 @@ gem 'haml-rails'
 gem 'bcrypt-ruby'
 
 group :development, :test do
-  gem 'byebug'
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'

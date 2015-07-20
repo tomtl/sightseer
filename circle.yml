@@ -1,0 +1,19 @@
+machine:
+  ruby:
+    version: 2.1.6
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app tomtl-sightseer
+      - heroku pg:backups capture --app tomtl-sightseer
+      - git push git@heroku.com:tomtl-sightseer.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app tomtl-sightseer
+      - heroku maintenance:off --app tomtl-sightseer
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app tomtl-sightseer-staging
+      - git push git@heroku.com:tomtl-sightseer-staging.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app tomtl-sightseer-staging
+      - heroku maintenance:off --app tomtl-sightseer-staging
