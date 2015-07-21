@@ -2,19 +2,21 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  password:
 
 development:
   <<: *default
   database: sightseer_development
   username: ubuntu
+  password:
 
 test:
   <<: *default
   database: sightseer_test
   username: ubuntu
+  password:
 
 production:
   <<: *default
   database: sightseer_production
   username: tomlee
+  password:
