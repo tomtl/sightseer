@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = "Welcome #{@user.full_name}! You have registered successfully."
+      flash[:success] = "Welcome #{@user.full_name}!"
       redirect_to home_path
     else
       flash.now[:error] = "Please fix the following errors."
