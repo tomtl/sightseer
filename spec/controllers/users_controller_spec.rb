@@ -32,7 +32,7 @@ describe UsersController do
       end
 
       it "sets the error message" do
-        expect(flash[:error]).to be_present
+        expect(flash[:danger]).to be_present
       end
 
       it "sets @user" do
@@ -41,6 +41,54 @@ describe UsersController do
 
       it "renders the :new template" do
         expect(response).to render_template(:new)
+      end
+    end
+  end
+
+  describe "GET edit" do
+    it "sets @user" do
+      user1 = Fabricate(:user)
+      get :edit, id: user1.id
+      expect(assigns(:user)).to eq(user1)
+    end
+  end
+
+  describe "POST update" do
+    context "with valid input" do
+      let(:user1) { Fabricate(:user, email: "robert@original_email.com") }
+      before { post :update, id: user1.id, user: { email: "bob@example.com" } }
+
+      it "updates the user" do
+        expect(User.first.email).to eq("bob@example.com")
+      end
+
+      it "sets the success message" do
+        expect(flash[:success]).to be_present
+      end
+
+      it "redirects to the home path" do
+        expect(response).to redirect_to home_path
+      end
+    end
+
+    context "with invalid inputs" do
+      let(:user1) { Fabricate(:user, email: "robert@original_email.com") }
+      before { post :update, id: user1.id, user: { email: "" } }
+
+      it "does not update the user" do
+        expect(User.first.email).to eq("robert@original_email.com")
+      end
+
+      it "sets the error message" do
+        expect(flash[:danger]).to be_present
+      end
+
+      it "sets @user" do
+        expect(assigns(:user)).to eq(user1)
+      end
+
+      it "renders the :edit template" do
+        expect(response).to render_template :edit
       end
     end
   end

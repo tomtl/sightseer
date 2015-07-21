@@ -1,0 +1,9 @@
+.container
+  = bootstrap_form_for @user do |f|
+    %header
+      %h1 Update User Information
+    %fieldset.col-md-6
+      = f.email_field :email, label: "Email Address"
+      = f.text_field :full_name, label: "Full Name"
+      = f.password_field :password
+      = f.submit "Update", class: "btn btn-primary"
