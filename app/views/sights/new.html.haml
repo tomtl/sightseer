@@ -1,0 +1,10 @@
+.container
+  = bootstrap_form_for @sight do |f|
+    %header
+      %h1 Add a new Sight
+    %fieldset.col-md-6
+      = f.text_field :name
+      = f.text_field :address
+      = f.select :category_id, options_for_select(Category.all.map{ |category| [category.name, category.id] })
+      = f.text_area :description, rows: 4
+      = f.submit "Create Sight", class: "btn btn-primary"
