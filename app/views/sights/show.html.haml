@@ -1,0 +1,23 @@
+.container
+  %h1= @sight.name
+  %p
+    %strong Category:
+    = @sight.category.name
+  %p
+    %strong Address:
+    = @sight.address
+  %p
+    %strong Description:
+    = @sight.description
+  %p
+    = image_tag single_location_map_link(@sight.address)
+
+  %h3 Photos
+  %p NEED A STRING OF PHOTO THUMBNAILS HERE
+
+  %h3 Reviews
+  %p Review: blah blah blah.
+  %p Review: more blah blah blah.
+  %a.btn.btn-default{href: "#", role: "button"} Add Review
+
+  %a.btn.btn-default{href: "#", role: "button"} Edit this Sight

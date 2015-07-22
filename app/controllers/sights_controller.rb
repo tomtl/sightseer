@@ -15,6 +15,7 @@ class SightsController < ApplicationController
   end
 
   def show
+    @sight = Sight.find(params[:id])
   end
 
   private
