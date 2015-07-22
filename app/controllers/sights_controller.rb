@@ -4,6 +4,22 @@ class SightsController < ApplicationController
   end
 
   def create
-    redirect_to sights_path
+    @sight = Sight.new(sight_params)
+    if @sight.save
+      flash[:success] = "#{@sight.name} has been created successfully!"
+      redirect_to sight_path(@sight)
+    else
+      flash.now[:danger] = "Please fix the following errors."
+      render :new
+    end
+  end
+
+  def show
+  end
+
+  private
+
+  def sight_params
+    params.require(:sight).permit(:name, :address, :category_id, :description)
   end
 end
