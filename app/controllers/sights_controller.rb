@@ -14,6 +14,10 @@ class SightsController < ApplicationController
     end
   end
 
+  def index
+    @sights = Sight.all
+  end
+
   def show
     @sight = Sight.find(params[:id])
   end
