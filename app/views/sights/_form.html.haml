@@ -1,0 +1,10 @@
+= bootstrap_form_for @sight do |f|
+  %header
+    %h1= @sight.new_record? ? "Create a Sight" : "Update: #{@sight.name}"
+  %fieldset.col-md-6
+    = f.text_field :name
+    = f.text_field :address
+    = f.select :category_id, options_for_categories
+    = f.text_area :description, rows: 4
+    = f.submit (@sight.new_record? ? "Create Sight" : "Update Sight"),
+      class: "btn btn-primary"

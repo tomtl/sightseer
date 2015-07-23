@@ -1,0 +1,8 @@
+.container
+  %h1 Sights
+
+  - @sights.each do |sight|
+    %p
+      %strong= link_to sight.name, sight_path(sight)
+      \ -
+      = sight.address
