@@ -22,6 +22,10 @@ class SightsController < ApplicationController
     @sight = Sight.find(params[:id])
   end
 
+  def edit
+    @sight = Sight.find(params[:id])
+  end
+
   private
 
   def sight_params
