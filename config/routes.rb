@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "home", to: "sights#index"
 
   resources :users, only: [:new, :create, :edit, :update]
+  resources :sights, except: [:destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
