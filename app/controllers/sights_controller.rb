@@ -26,6 +26,17 @@ class SightsController < ApplicationController
     @sight = Sight.find(params[:id])
   end
 
+  def update
+    @sight = Sight.find(params[:id])
+    if @sight.update(sight_params)
+      flash[:success] = "You have updated #{@sight.name} successfully."
+      redirect_to sight_path(@sight)
+    else
+      flash.now[:danger] = "Please fix the following errors."
+      render :edit
+    end
+  end
+
   private
 
   def sight_params

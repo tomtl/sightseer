@@ -71,4 +71,43 @@ describe SightsController do
       expect(assigns(:sight)).to eq(sight1)
     end
   end
+
+  describe "PATCH update" do
+    context "with valid inputs" do
+      let(:sight1) { Fabricate(:sight) }
+
+      before do
+        patch :update, { id: sight1.id, sight: { name: "Bob's House" } }
+      end
+
+      it "updates the sight" do
+        expect(Sight.first.name).to eq("Bob's House")
+      end
+
+      it "sets the success message" do
+        expect(flash[:success]).to be_present
+      end
+
+      it "redirects to the sight page" do
+        expect(response).to redirect_to(sight_path(sight1))
+      end
+    end
+
+    context "with invalid inputs" do
+      let(:sight1) { Fabricate(:sight) }
+      before { patch :update, { id: sight1.id, sight: { name: nil } } }
+
+      it "does not update the sight" do
+        expect(Sight.first.name).to eq(sight1.name)
+      end
+
+      it "sets the error message" do
+        expect(flash[:danger]).to be_present
+      end
+
+      it "renders the :edit template" do
+        expect(response).to render_template :edit
+      end
+    end
+  end
 end
