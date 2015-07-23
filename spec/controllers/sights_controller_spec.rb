@@ -77,7 +77,7 @@ describe SightsController do
       let(:sight1) { Fabricate(:sight) }
 
       before do
-        patch :update, { id: sight1.id, sight: { name: "Bob's House" } }
+        patch :update, id: sight1.id, sight: { name: "Bob's House" }
       end
 
       it "updates the sight" do
@@ -95,7 +95,7 @@ describe SightsController do
 
     context "with invalid inputs" do
       let(:sight1) { Fabricate(:sight) }
-      before { patch :update, { id: sight1.id, sight: { name: nil } } }
+      before { patch :update, id: sight1.id, sight: { name: nil } }
 
       it "does not update the sight" do
         expect(Sight.first.name).to eq(sight1.name)
