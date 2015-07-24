@@ -16,6 +16,10 @@ describe UsersController do
         expect(User.count).to eq(1)
       end
 
+      it "adds the user to the session" do
+        expect(session[:user_id]).to eq(User.first.id)
+      end
+
       it "sets the success message" do
         expect(flash[:success]).to be_present
       end

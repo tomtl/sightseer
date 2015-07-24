@@ -6,13 +6,13 @@ default: &default
 development:
   <<: *default
   database: sightseer_development
-  username: ubuntu
+  username: tomlee
   password:
 
 test:
   <<: *default
   database: sightseer_test
-  username: ubuntu
+  username: tomlee
   password:
 
 production:
