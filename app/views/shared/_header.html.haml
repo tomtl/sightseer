@@ -1,19 +1,11 @@
 %nav.navbar.navbar-inverse
   .container
-    / Brand and toggle get grouped for better mobile display
     .navbar-header
-      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
       %a.navbar-brand{href: home_path} Sightseer
-    / Collect the nav links, forms, and other content for toggling
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
-          %a{:href => "#"}
-            Link
+          %a{href: sights_path}
+            Sights
             %span.sr-only (current)
         %li
           %a{:href => "#"} Link
@@ -34,26 +26,32 @@
             %li.divider{:role => "separator"}
             %li
               %a{:href => "#"} One more separated link
-      %form.navbar-form.navbar-left{:role => "search"}
-        .form-group
-          %input.form-control{:placeholder => "Search", :type => "text"}
-        %button.btn.btn-default{:type => "submit"} Submit
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{:href => "#"} Link
-        %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            Dropdown
-            %span.caret
-          %ul.dropdown-menu
-            %li
-              %a{:href => "#"} Action
-            %li
-              %a{:href => "#"} Another action
-            %li
-              %a{:href => "#"} Something else here
-            %li.divider{:role => "separator"}
-            %li
-              %a{:href => "#"} Separated link
+
+      - if current_user
+        %form.navbar-form.navbar-left{:role => "search"}
+          .form-group
+            %input.form-control{:placeholder => "Search", :type => "text"}
+          %button.btn.btn-default{:type => "submit"} Submit
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            %a{:href => "#"} Link
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              Welcome, #{current_user.full_name}!
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{href: edit_user_path(current_user)} Edit Profile
+              %li
+                %a{:href => "#"} Another action
+              %li
+                %a{:href => "#"} Something else here
+              %li.divider{:role => "separator"}
+              %li
+                %a{:href => "#"} Separated link
+      - else
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            %a.btn.btn-primary{href: sign_in_path, role: "button"} Sign In
   / /.navbar-collapse
 / /.container-fluid

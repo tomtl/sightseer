@@ -3,15 +3,27 @@ require "spec_helper"
 describe SightsController do
   describe "GET new" do
     it "sets @sight" do
+      set_current_user
       get :new
       expect(assigns(:sight)).to be_instance_of(Sight)
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) { get :new }
     end
   end
 
   describe "POST create" do
+    it_behaves_like "requires sign in" do
+      let(:action) { post :create }
+    end
+
     context "with valid inputs" do
       let(:sight1) { Fabricate.attributes_for(:sight) }
-      before { post :create, sight: sight1 }
+      before do
+        set_current_user
+        post :create, sight: sight1
+      end
 
       it "creates the sight" do
         expect(Sight.first.name).to eq(sight1[:name])
@@ -27,7 +39,10 @@ describe SightsController do
     end
 
     context "with invalid inputs" do
-      before { post :create, sight: { name: "Dude Ranch" } }
+      before do
+        set_current_user
+        post :create, sight: { name: "Dude Ranch" }
+      end
 
       it "does not create the sight" do
         expect(Sight.count).to eq(0)
@@ -66,17 +81,27 @@ describe SightsController do
 
   describe "GET edit" do
     it "sets @sight" do
+      set_current_user
       sight1 = Fabricate(:sight)
       get :edit, id: sight1.id
       expect(assigns(:sight)).to eq(sight1)
     end
+
+    it_behaves_like "requires sign in" do
+      let(:action) { get :edit, id: 1 }
+    end
   end
 
   describe "PATCH update" do
+    it_behaves_like "requires sign in" do
+      let(:action) { patch :update, id: 1 }
+    end
+
     context "with valid inputs" do
       let(:sight1) { Fabricate(:sight) }
 
       before do
+        set_current_user
         patch :update, id: sight1.id, sight: { name: "Bob's House" }
       end
 
@@ -95,7 +120,10 @@ describe SightsController do
 
     context "with invalid inputs" do
       let(:sight1) { Fabricate(:sight) }
-      before { patch :update, id: sight1.id, sight: { name: nil } }
+      before do
+        set_current_user
+        patch :update, id: sight1.id, sight: { name: nil }
+      end
 
       it "does not update the sight" do
         expect(Sight.first.name).to eq(sight1.name)
