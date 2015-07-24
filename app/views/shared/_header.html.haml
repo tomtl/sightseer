@@ -49,6 +49,23 @@
               %li.divider{:role => "separator"}
               %li
                 %a{:href => "#"} Separated link
+          .btn-group.nav_item
+            = link_to('', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown') do
+              = current_user.full_name
+              %span.caret </
+            %ul.dropdown-menu
+              %li
+                = link_to edit_user_path(current_user) do
+                  %i.icon-pencil
+                  edit profile
+              %li
+                = link_to user_path(current_user) do
+                  %i.icon-user
+                  view profile
+              %li
+                = link_to sign_out_path do
+                  %i.icon-circle-arrow-left
+                  logout
       - else
         %ul.nav.navbar-nav.navbar-right
           %li
