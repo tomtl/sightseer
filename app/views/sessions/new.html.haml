@@ -1,0 +1,11 @@
+.container
+  .form
+    .fieldset.col-md-6
+      .form-group
+        %label{for: "email"} Email address
+        %input#email.form-control{placeholder: "Email", type: "email"}
+      .form-group
+        %label{for: "password"} Password
+        %input#password.form-control{placeholder: "Password", type: "password"}
+      %button.btn.btn-primary{type: "submit"} Log In
+      = link_to "Forgot Password?", "#", class:"btn btn-default"
