@@ -6,4 +6,8 @@ class Sight < ActiveRecord::Base
 
   belongs_to :category, -> { order "name" }
   has_many :reviews
+
+  def average_rating
+    reviews.average(:rating).round(1) if reviews.average(:rating)
+  end
 end
