@@ -31,7 +31,7 @@
             %label Rate this sight
             .row
               .col-sm-3
-                = f.select :rating, options_for_sight_reviews
+                = f.select :rating, options_for_sight_ratings
           .form-group
             .row
               .col-sm-8
@@ -40,7 +40,7 @@
           = f.submit "Submit"
           = link_to "Cancel", @sight
       %header
-        %h3 Reviews (#{@reviews.count})
+        -# %h3 Reviews (#{@reviews.count})
       %ul
         - @reviews.each do |review|
           %article.review

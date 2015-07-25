@@ -9,4 +9,14 @@ module ApplicationHelper
       Category.all.map { |category| [category.name, category.id] }
     )
   end
+
+  def options_for_sight_ratings(selected = nil)
+    options_for_select(rating_values_list, selected)
+  end
+
+  private
+
+  def rating_values_list
+    [5,4,3,2,1].map { |number| [pluralize(number, "Star"), number] }
+  end
 end

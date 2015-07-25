@@ -22,6 +22,7 @@ class SightsController < ApplicationController
 
   def show
     @sight = Sight.find(params[:id])
+    @reviews = @sight.reviews
   end
 
   def edit
