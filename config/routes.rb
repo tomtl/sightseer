@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   get "home", to: "sights#index"
 
   resources :users, only: [:new, :create, :edit, :update]
+
+  resources :sessions, only: [:create, :destroy]
+  get "sign_in", to: "sessions#new"
+  get "sign_out", to: "sessions#destroy"
+
   resources :sights, except: [:destroy]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

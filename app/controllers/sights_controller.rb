@@ -1,4 +1,6 @@
 class SightsController < ApplicationController
+  before_action :require_user, except: [:show, :index]
+
   def new
     @sight = Sight.new
   end
