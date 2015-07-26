@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "sign_out", to: "sessions#destroy"
 
   resources :sights, except: [:destroy] do
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :edit]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

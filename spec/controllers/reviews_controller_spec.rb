@@ -66,4 +66,27 @@ describe ReviewsController do
       end
     end
   end
+
+  describe "GET edit" do
+    it "sets @review" do
+      user1 = Fabricate(:user)
+      set_current_user(user1)
+      sight1 = Fabricate(:sight)
+      review1 = Fabricate(:review, sight: sight1, user_id: user1.id)
+      get :edit, sight_id: sight1.id, id: review1.id
+      expect(assigns(:review)).to eq(review1)
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) { get :edit, sight_id: 1, id: 1 }
+    end
+
+    it "redirects to sight show page if user is not the review creator" do
+      review1 = Fabricate(:review)
+      user2 = Fabricate(:user)
+      set_current_user(user2)
+      get :edit, sight_id: review1.sight.id, id: review1.id
+      expect(response).to redirect_to sight_path(review1.sight)
+    end
+  end
 end
