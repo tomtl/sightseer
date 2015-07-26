@@ -17,6 +17,6 @@ module ApplicationHelper
   private
 
   def rating_values_list
-    [5,4,3,2,1].map { |number| [pluralize(number, "Star"), number] }
+    [5, 4, 3, 2, 1].map { |number| [pluralize(number, "Star"), number] }
   end
 end

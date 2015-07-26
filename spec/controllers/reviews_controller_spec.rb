@@ -19,7 +19,7 @@ describe ReviewsController do
         end
 
         it "assigns the review to the current user" do
-          current_user  = User.find(session[:user_id])
+          current_user = User.find(session[:user_id])
           expect(Review.first.creator).to eq(current_user)
         end
         it "sets the success message" do
@@ -33,7 +33,11 @@ describe ReviewsController do
 
       context "with invalid inputs" do
         let(:sight1) { Fabricate(:sight) }
-        let(:review1) { Fabricate.attributes_for(:review, sight_id: sight1.id, rating: nil) }
+
+        let(:review1) do
+          Fabricate.attributes_for(:review, sight_id: sight1.id, rating: nil)
+        end
+
         before { post :create, review: review1, sight_id: sight1.id }
 
         it "does not create the review" do
@@ -150,7 +154,7 @@ describe ReviewsController do
     context "with incorrect user" do
       let(:review_creator) { Fabricate(:user) }
       let(:review1) { Fabricate(:review, user_id: review_creator.id) }
-      let(:another_user) {Fabricate(:user) }
+      let(:another_user) { Fabricate(:user) }
 
       before do
         set_current_user(another_user)

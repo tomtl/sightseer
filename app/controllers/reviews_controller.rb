@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :require_user
   before_action :require_creator, only: [:edit, :update]
-  before_action :set_sight, only: [:create, :edit]
+  before_action :set_sight, only: [:create, :edit, :update]
   before_action :set_review, only: [:edit, :update]
 
   def create
@@ -22,8 +22,8 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      flash[:success] = "Your review of #{@review.sight.name} has been updated."
-      redirect_to sight_path(@review.sight)
+      flash[:success] = "Your review of #{@sight.name} has been updated."
+      redirect_to sight_path(@sight)
     else
       flash.now[:danger] = "Please fix the following errors."
       render :edit
