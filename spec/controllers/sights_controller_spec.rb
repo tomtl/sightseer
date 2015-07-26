@@ -77,6 +77,13 @@ describe SightsController do
       get :show, id: sight1.id
       expect(assigns(:sight)).to eq(sight1)
     end
+
+    it "sets @reviews" do
+      sight1 = Fabricate(:sight)
+      review1 = Fabricate(:review, sight_id: sight1.id)
+      get :show, id: sight1.id
+      expect(assigns(:reviews)).to include(review1)
+    end
   end
 
   describe "GET edit" do

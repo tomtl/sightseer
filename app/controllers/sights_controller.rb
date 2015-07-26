@@ -1,5 +1,6 @@
 class SightsController < ApplicationController
   before_action :require_user, except: [:show, :index]
+  before_action :set_sight, only: [:show, :edit, :update]
 
   def new
     @sight = Sight.new
@@ -21,15 +22,13 @@ class SightsController < ApplicationController
   end
 
   def show
-    @sight = Sight.find(params[:id])
+    @reviews = @sight.reviews
   end
 
   def edit
-    @sight = Sight.find(params[:id])
   end
 
   def update
-    @sight = Sight.find(params[:id])
     if @sight.update(sight_params)
       flash[:success] = "You have updated #{@sight.name} successfully."
       redirect_to sight_path(@sight)
@@ -43,5 +42,9 @@ class SightsController < ApplicationController
 
   def sight_params
     params.require(:sight).permit(:name, :address, :category_id, :description)
+  end
+
+  def set_sight
+    @sight = Sight.find(params[:id])
   end
 end
