@@ -5,4 +5,9 @@ class Sight < ActiveRecord::Base
   validates :description, presence: true
 
   belongs_to :category, -> { order "name" }
+  has_many :reviews
+
+  def average_rating
+    reviews.average(:rating).round(1) if reviews.average(:rating)
+  end
 end
