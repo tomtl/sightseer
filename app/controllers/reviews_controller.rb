@@ -17,6 +17,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    @sight = Sight.find(params[:sight_id])
     @review = Review.find(params[:id])
   end
 

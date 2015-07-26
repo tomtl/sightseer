@@ -1,1 +1,8 @@
-%h3 Edit review
+.container
+  = bootstrap_form_for [@sight, @review] do  |f|
+    %header
+      %h1 Update Review
+    %fieldset.col-md-6
+      = f.select :rating, options_for_sight_ratings
+      = f.text_field :content
+      = f.submit "Update Review", class: "btn btn-primary"
