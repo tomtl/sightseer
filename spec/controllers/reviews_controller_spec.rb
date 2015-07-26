@@ -89,4 +89,88 @@ describe ReviewsController do
       expect(response).to redirect_to sight_path(review1.sight)
     end
   end
+
+  describe "PATCH update" do
+    context "with valid inputs" do
+      let(:current_user) { Fabricate(:user) }
+      let(:review1) { Fabricate(:review, user_id: current_user.id) }
+
+      before do
+        set_current_user(current_user)
+        patch :update,
+              sight_id: review1.sight.id,
+              id: review1.id,
+              review: { content: "Here's an update." }
+      end
+
+      it "updates the review" do
+        expect(Review.first.content).to eq("Here's an update.")
+      end
+
+      it "sets the success message" do
+        expect(flash[:success]).to be_present
+      end
+
+      it "redirects to the sight page" do
+        expect(response).to redirect_to sight_path(review1.sight)
+      end
+    end
+
+    context "with invalid inputs" do
+      let(:current_user) { Fabricate(:user) }
+      let(:review1) { Fabricate(:review, user_id: current_user.id) }
+
+      before do
+        set_current_user(current_user)
+        patch :update,
+              sight_id: review1.sight.id,
+              id: review1.id,
+              review: { rating: nil }
+      end
+
+      it "does not update the review" do
+        expect(Review.first.rating).to eq(review1.rating)
+      end
+
+      it "sets the error message" do
+        expect(flash[:danger]).to be_present
+      end
+
+      it "renders the :edit view template" do
+        expect(response).to render_template :edit
+      end
+    end
+
+    context "for unauthenticated user" do
+      it_behaves_like "requires sign in" do
+        let(:action) { patch :update, sight_id: 1, id: 1 }
+      end
+    end
+
+    context "with incorrect user" do
+      let(:review_creator) { Fabricate(:user) }
+      let(:review1) { Fabricate(:review, user_id: review_creator.id) }
+      let(:another_user) {Fabricate(:user) }
+
+      before do
+        set_current_user(another_user)
+        patch :update,
+              sight_id: review1.sight.id,
+              id: review1.id,
+              review: { content: "Here's an update." }
+      end
+
+      it "does not update the review" do
+        expect(Review.first.content).to eq(review1.content)
+      end
+
+      it "sets the error messsage" do
+        expect(flash[:danger]).to be_present
+      end
+
+      it "redirects to the sight page" do
+        expect(response).to redirect_to sight_path(review1.sight)
+      end
+    end
+  end
 end
