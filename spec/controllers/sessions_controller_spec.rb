@@ -57,15 +57,20 @@ describe SessionsController do
   end
 
   describe "DELETE destroy" do
-    it "removes the user from the session" do
+    before do
       set_current_user
       delete :destroy
+    end
+
+    it "removes the user from the session" do
       expect(session[:user_id]).to be_nil
     end
 
+    it "sets the success message" do
+      expect(flash[:success]).to be_present
+    end
+
     it "redirects to the root path" do
-      set_current_user
-      delete :destroy
       expect(response).to redirect_to root_path
     end
   end
