@@ -7,11 +7,11 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{href: home_path} Sightseer
+      %a.navbar-brand{href: root_path} Sightseer
     #navbar.navbar-collapse.collapse
       %ul.nav.navbar-nav
         %li
-          %a{:href => "#about"} Sights
+          %a{href: sights_path} Sights
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
             Search for Sights
@@ -30,7 +30,7 @@
             %li
               %a{:href => "#"} One more separated link
         %li
-          %a{:href => "#about"} Add a Sight
+          %a{href: new_sight_path} Add a Sight
         %li
           %a{:href => "#about"} About
         %li
