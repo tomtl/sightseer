@@ -10,7 +10,8 @@ feature "User creates a review" do
     expect(page).to have_content("Rate this Sight")
 
     add_a_rating_and_review
-    expect(page).to have_content("Your review of #{sight1.name} has been added.")
+    expect(page).to have_content(
+      "Your review of #{sight1.name} has been added.")
     expect_review_to_be_visible
 
     click_link "Edit this review"

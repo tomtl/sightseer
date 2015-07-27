@@ -12,10 +12,11 @@ feature "User adds sight" do
 
     fill_in "Name", with: sight1[:name]
     fill_in "Address", with: sight1[:address]
-    select  "Monuments", from: "Category"
+    select "Monuments", from: "Category"
     fill_in "Description", with: sight1[:description]
     click_button "Create Sight"
-    expect(page).to have_content("#{sight1[:name]} has been created successfully!")
+    expect(page).to have_content(
+      "#{sight1[:name]} has been created successfully!")
     expect(page).to have_content("Average Rating")
 
     click_link "Edit this Sight"
