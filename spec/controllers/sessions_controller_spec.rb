@@ -61,7 +61,7 @@ describe SessionsController do
       set_current_user
       delete :destroy
     end
-    
+
     it "removes the user from the session" do
       expect(session[:user_id]).to be_nil
     end
