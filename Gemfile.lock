@@ -44,6 +44,12 @@ GEM
       sass (~> 3.2)
     bootstrap_form (2.3.0)
     builder (3.2.2)
+    capybara (2.4.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -177,6 +183,8 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -185,6 +193,7 @@ DEPENDENCIES
   bcrypt
   bootstrap-sass
   bootstrap_form
+  capybara
   coffee-rails (~> 4.1.0)
   database_cleaner (= 1.2.0)
   fabrication
@@ -203,3 +212,6 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.10.5
