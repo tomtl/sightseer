@@ -1,5 +1,8 @@
 .container.sight
-  %h1= @sight.name
+  .row
+    %h1.col-md-8= @sight.name
+    .col-md-4
+      = link_to "+ I've been to this Sight", visited_sights_path(sight_id: @sight.id), method: :post, class: 'btn btn-primary'
   %p
     %strong Average Rating:
     #{@sight.average_rating} /5
