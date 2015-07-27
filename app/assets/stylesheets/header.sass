@@ -2,12 +2,28 @@ $blue1: #0071ad
 $blue2: #1d3a58
 $blue3: #121736
 
-nav.navbar.navbar-inverse
+nav.navbar-default
   background-color: $blue1
   border-color: $blue2
+  color: white
   .navbar-brand
     font-size: 2em
-  a
     color: white
-  li a
-    color: white
+  .navbar-brand:hover
+    color: $blue3
+  .navbar-nav
+    a
+      color: white
+    li
+      a
+        color: white
+      a:hover
+        background-color: white
+        color: $blue3
+    .active
+      a
+        background-color: white
+    .open
+      a
+        color: $blue3
+        background-color: white
