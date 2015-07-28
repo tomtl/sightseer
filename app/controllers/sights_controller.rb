@@ -22,7 +22,6 @@ class SightsController < ApplicationController
   end
 
   def show
-    @reviews = @sight.reviews
   end
 
   def edit
