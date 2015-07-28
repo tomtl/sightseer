@@ -22,6 +22,8 @@
   %a.btn.btn-default{href: edit_sight_path(@sight), role: "button"} Edit this Sight
 
   %h3 Photos
+  %p= link_to "Add Photos", new_sight_photo_path(@sight)
+
   %p NEED A STRING OF PHOTO THUMBNAILS HERE
 
   %h3 Reviews (#{@sight.reviews.count})
