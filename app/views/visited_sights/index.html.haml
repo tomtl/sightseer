@@ -1,5 +1,5 @@
 .container
-  %h1 Sights I've Visited
+  %h1 Sights #{@user.full_name} has visited
   - @visited_sights.each do |visited_sight|
     %p
       .col-md-8
@@ -7,7 +7,7 @@
         \-
         = visited_sight.sight.address
 
-      - if current_user.reviewed_sight?(visited_sight.sight)
+      - if @user.reviewed_sight?(visited_sight.sight)
         .col-md-4
           My rating:
-          = current_user.sight_review(visited_sight.sight).rating
+          = @user.sight_review(visited_sight.sight).rating

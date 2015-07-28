@@ -65,10 +65,19 @@ describe VisitedSightsController do
   end
 
   describe "GET index" do
+    it "sets @user" do
+      set_current_user
+      user2 = Fabricate(:user)
+      visited_sight1 = Fabricate(:visited_sight, user_id: user2.id)
+      get :index, user_id: user2.id
+      expect(assigns(:user)).to eq(user2)
+    end
+
     it "sets @visited_sights" do
       set_current_user
-      visited_sight1 = Fabricate(:visited_sight, user_id: current_user.id)
-      get :index, user_id: current_user.id
+      user2 = Fabricate(:user)
+      visited_sight1 = Fabricate(:visited_sight, user_id: user2.id)
+      get :index, user_id: user2.id
       expect(assigns(:visited_sights)).to eq([visited_sight1])
     end
 

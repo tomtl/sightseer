@@ -16,6 +16,7 @@ class VisitedSightsController < ApplicationController
   end
 
   def index
-    @visited_sights = current_user.visited_sights
+    @user = User.find(params[:user_id])
+    @visited_sights = @user.visited_sights
   end
 end
