@@ -1,5 +1,6 @@
 class VisitedSightsController < ApplicationController
   before_action :require_user
+  before_action :require_list_owner, only: [:destroy]
 
   def create
     @sight = Sight.find(params[:sight_id])
@@ -18,5 +19,23 @@ class VisitedSightsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @visited_sights = @user.visited_sights
+  end
+
+  def destroy
+    @visited_sight = VisitedSight.find(params[:id])
+    @visited_sight.destroy
+    flash.now[:success] = "The sight has been removed from your list successfully."
+    redirect_to user_visited_sights_path(user_id: current_user.id)
+  end
+
+  private
+
+  def require_list_owner
+    visited_sights_list_owner = User.find(params[:user_id])
+
+    if current_user != visited_sights_list_owner
+      flash[:danger] = "You are not allowed to do that."
+      redirect_to home_path
+    end
   end
 end

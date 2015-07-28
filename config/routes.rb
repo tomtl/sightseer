@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "home", to: "sights#index"
 
   resources :users, only: [:new, :create, :edit, :update] do
-    resources :visited_sights, only: [:create, :index]
+    resources :visited_sights, only: [:create, :index, :destroy]
   end
 
   resources :sessions, only: [:create, :destroy]

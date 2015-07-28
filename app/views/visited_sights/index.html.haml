@@ -6,6 +6,8 @@
         = link_to visited_sight.sight.name, sight_path(visited_sight.sight)
         \-
         = visited_sight.sight.address
+        - if @user == current_user
+          = link_to "(Remove)", user_visited_sight_path(user_id: current_user.id, id: visited_sight.id), method: "delete"
 
       - if @user.reviewed_sight?(visited_sight.sight)
         .col-md-4
