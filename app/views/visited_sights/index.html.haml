@@ -1,0 +1,15 @@
+.container
+  %h1 Sights #{@user.full_name} has visited
+  - @visited_sights.each do |visited_sight|
+    %p
+      .col-md-8
+        = link_to visited_sight.sight.name, sight_path(visited_sight.sight)
+        \-
+        = visited_sight.sight.address
+        - if @user == current_user
+          = link_to "(Remove)", user_visited_sight_path(user_id: current_user.id, id: visited_sight.id), method: "delete"
+
+      - if @user.reviewed_sight?(visited_sight.sight)
+        .col-md-4
+          My rating:
+          = @user.sight_review(visited_sight.sight).rating

@@ -1,5 +1,9 @@
 .container.sight
-  %h1= @sight.name
+  .row
+    %h1.col-md-8= @sight.name
+    - if current_user
+      .col-md-4
+        = link_to "+ I've been to this Sight", user_visited_sights_path(user_id: current_user.id, sight_id: @sight.id), method: :post, class: 'btn btn-primary'
   %p
     %strong Average Rating:
     #{@sight.average_rating} /5
@@ -20,14 +24,15 @@
   %h3 Photos
   %p NEED A STRING OF PHOTO THUMBNAILS HERE
 
-  %h3 Reviews (#{@reviews.count})
-  - @reviews.each do |review|
+  %h3 Reviews (#{@sight.reviews.count})
+  - @sight.reviews.each do |review|
     %article.review
       .row
         .col-sm-2
           %span Rating: #{review.rating} / 5
-          %p by
-          = link_to review.creator.full_name, user_path(review.creator)
+          %p.row
+            by
+            = link_to review.creator.full_name, user_path(review.creator)
         .col-sm-8
           %p= review.content
           - if current_user == review.creator
