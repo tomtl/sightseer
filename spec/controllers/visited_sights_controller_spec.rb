@@ -7,18 +7,18 @@ describe VisitedSightsController do
 
       before  do
         set_current_user
-        post :create, sight_id: sight1.id
+        post :create, sight_id: sight1.id, user_id: current_user.id
       end
 
       it "creates the visited sight" do
         expect(VisitedSight.count).to eq(1)
       end
 
-      it "associates the visited sight with the correct user" do
+      it "associates the visited sight with the current user" do
         expect(VisitedSight.first.user).to eq(current_user)
       end
 
-      it "associates the visited wight with the correct sight" do
+      it "associates the visited sight with the correct sight" do
         expect(VisitedSight.first.sight).to eq(sight1)
       end
 
@@ -32,16 +32,11 @@ describe VisitedSightsController do
     end
 
     context "for invalid inputs" do
-      it "does not create the visited sight" do
-        post :create, sight_id: nil
-        expect(VisitedSight.count).to eq(0)
-      end
-
       it "does not create duplicate records" do
         set_current_user
         sight1 = Fabricate(:sight)
         visited_sight1 = Fabricate(:visited_sight, user_id: current_user.id, sight_id: sight1.id)
-        post :create, sight_id: sight1.id
+        post :create, sight_id: sight1.id, user_id: current_user.id
         expect(VisitedSight.count).to eq(1)
       end
 
@@ -49,7 +44,7 @@ describe VisitedSightsController do
         set_current_user
         sight1 = Fabricate(:sight)
         visited_sight1 = Fabricate(:visited_sight, user_id: current_user.id, sight_id: sight1.id)
-        post :create, sight_id: sight1.id
+        post :create, sight_id: sight1.id, user_id: current_user.id
         expect(flash[:danger]).to be_present
       end
 
@@ -57,15 +52,28 @@ describe VisitedSightsController do
         set_current_user
         sight1 = Fabricate(:sight)
         visited_sight1 = Fabricate(:visited_sight, user_id: current_user.id, sight_id: sight1.id)
-        post :create, sight_id: sight1.id
+        post :create, sight_id: sight1.id, user_id: current_user.id
         expect(response).to render_template "sights/show"
       end
     end
 
     context "for unauthenticated users" do
       it_behaves_like "requires sign in" do
-        let(:action) { post :create, sight_id: 1 }
+        let(:action) { post :create, sight_id: 1, user_id: 1 }
       end
+    end
+  end
+
+  describe "GET index" do
+    it "sets @visited_sights" do
+      set_current_user
+      visited_sight1 = Fabricate(:visited_sight, user_id: current_user.id)
+      get :index, user_id: current_user.id
+      expect(assigns(:visited_sights)).to eq([visited_sight1])
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) { get :index, user_id: 1 }
     end
   end
 end

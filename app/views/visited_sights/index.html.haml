@@ -1,0 +1,13 @@
+.container
+  %h1 Sights I've Visited
+  - @visited_sights.each do |visited_sight|
+    %p
+      .col-md-8
+        = link_to visited_sight.sight.name, sight_path(visited_sight.sight)
+        \-
+        = visited_sight.sight.address
+
+      - if current_user.reviewed_sight?(visited_sight.sight)
+        .col-md-4
+          My rating:
+          = current_user.sight_review(visited_sight.sight).rating

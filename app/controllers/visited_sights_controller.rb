@@ -11,6 +11,11 @@ class VisitedSightsController < ApplicationController
     else
       flash[:danger] = "You already have this sight on your list"
     end
+    @reviews = @sight.reviews
     render "sights/show"
+  end
+
+  def index
+    @visited_sights = current_user.visited_sights
   end
 end
