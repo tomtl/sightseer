@@ -5,7 +5,7 @@ describe VisitedSightsController do
     context "for valid inputs" do
       let(:sight1) { Fabricate(:sight) }
 
-      before  do
+      before do
         set_current_user
         post :create, sight_id: sight1.id, user_id: current_user.id
       end
@@ -32,27 +32,22 @@ describe VisitedSightsController do
     end
 
     context "for invalid inputs" do
-      it "does not create duplicate records" do
+      before do
         set_current_user
         sight1 = Fabricate(:sight)
-        visited_sight1 = Fabricate(:visited_sight, user_id: current_user.id, sight_id: sight1.id)
+        Fabricate(:visited_sight, user_id: current_user.id, sight_id: sight1.id)
         post :create, sight_id: sight1.id, user_id: current_user.id
+      end
+
+      it "does not create duplicate records" do
         expect(VisitedSight.count).to eq(1)
       end
 
       it "displays the error message" do
-        set_current_user
-        sight1 = Fabricate(:sight)
-        visited_sight1 = Fabricate(:visited_sight, user_id: current_user.id, sight_id: sight1.id)
-        post :create, sight_id: sight1.id, user_id: current_user.id
         expect(flash[:danger]).to be_present
       end
 
       it "renders the sights/show page" do
-        set_current_user
-        sight1 = Fabricate(:sight)
-        visited_sight1 = Fabricate(:visited_sight, user_id: current_user.id, sight_id: sight1.id)
-        post :create, sight_id: sight1.id, user_id: current_user.id
         expect(response).to render_template "sights/show"
       end
     end
@@ -68,7 +63,7 @@ describe VisitedSightsController do
     it "sets @user" do
       set_current_user
       user2 = Fabricate(:user)
-      visited_sight1 = Fabricate(:visited_sight, user_id: user2.id)
+      Fabricate(:visited_sight, user_id: user2.id)
       get :index, user_id: user2.id
       expect(assigns(:user)).to eq(user2)
     end
