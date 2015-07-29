@@ -18,4 +18,57 @@ describe PhotosController do
       let(:action) { get :new, sight_id: 1 }
     end
   end
+
+  describe "POST create" do
+    context "for valid inputs" do
+      before do
+        set_current_user
+        photo_params = {
+          description: "Photo of a place",
+          image: "eiffel-tower-01.jpg"
+        }
+        post :create, sight_id: Fabricate(:sight), photo: photo_params
+      end
+
+      it "saves the photo" do
+        expect(Photo.count).to eq(1)
+      end
+
+      it "associates the photo with the correct user" do
+        expect(Photo.first.user).to eq(current_user)
+      end
+
+      it "associates the photo with the correct sight" do
+        expect(Photo.first.sight).to eq(Sight.first)
+      end
+
+      it "generates a thumbnail"
+
+      it "sets the success message" do
+        expect(flash[:success]).to be_present
+      end
+
+      it "renders the new template" do
+        expect(Photo.count).to eq(1)
+      end
+    end
+
+    context "for invalid inputs" do
+      it "does not create the photo" do
+        set_current_user
+        photo_params = { description: "Photo of a place", image: "" }
+        post :create, sight_id: Fabricate(:sight), photo: photo_params
+        expect(Photo.count).to eq(0)
+      end
+
+      it "sets the error message"
+      it "renders the new template"
+    end
+
+    context "for unauthenticated users" do
+      it_behaves_like "requires sign in" do
+        let(:action) { post :create, sight_id: 1 }
+      end
+    end
+  end
 end

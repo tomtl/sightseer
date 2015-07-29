@@ -1,4 +1,8 @@
 class Photo < ActiveRecord::Base
-  mount_uploader :photo, PhotoUploader
-  mount_uploader :thumbnail, ThumbnailUploader
+  belongs_to :user
+  belongs_to :sight
+
+  validates :image, presence: true
+
+  mount_uploader :image, ImageUploader
 end

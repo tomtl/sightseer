@@ -17,6 +17,8 @@
     %strong Description:
     = @sight.description
   %p
+    = image_tag @sight.photos.first.image if @sight.photos.first
+  %p
     = image_tag single_location_map_link(@sight.address)
 
   %a.btn.btn-default{href: edit_sight_path(@sight), role: "button"} Edit this Sight
