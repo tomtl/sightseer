@@ -22,6 +22,8 @@ class PhotosController < ApplicationController
   end
 
   def show
+    @photo = Photo.find(params[:id])
+    @sight = @photo.sight
   end
 
   private

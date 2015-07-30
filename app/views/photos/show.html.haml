@@ -1,0 +1,9 @@
+.container.sight
+  .center-block
+    = image_tag @photo.image
+    %p
+      = @photo.description
+      Added by:
+      = @photo.user.full_name
+    %p
+      = link_to "Return to Sight", sight_path(@photo.sight), class:"btn btn-primary"

@@ -80,4 +80,20 @@ describe PhotosController do
       end
     end
   end
+
+  describe "GET show" do
+    it "sets @photo" do
+      user1 = Fabricate(:user)
+      set_current_user(user1)
+      sight1 = Fabricate(:sight)
+      photo1 = Photo.new(
+        description: "Here is description",
+        sight_id: sight1.id,
+        user_id: user1.id,
+      )
+      photo1.save(:validate => false)
+      get :show, sight_id: sight1.id, id: photo1.id
+      expect(assigns(:photo)).to be_present
+    end
+  end
 end
