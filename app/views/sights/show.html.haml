@@ -1,65 +1,62 @@
 .container.sight
-  .row
-    %h1.col-md-8= @sight.name
-    - if current_user
-      .col-md-4
-        = link_to "+ I've been to this Sight", user_visited_sights_path(user_id: current_user.id, sight_id: @sight.id), method: :post, class: 'btn btn-primary'
-  %p
-    %strong Average Rating:
-    #{@sight.average_rating} /5
-  %p
-    %strong Category:
-    = @sight.category.name
-  %p
-    %strong Address:
-    = @sight.address
-  %p
-    %strong Description:
-    = @sight.description
-  %p
-    = image_tag @sight.photos.first.image if @sight.photos.first
-  %p
-    = image_tag single_location_map_link(@sight.address)
-
-  %a.btn.btn-default{href: edit_sight_path(@sight), role: "button"} Edit this Sight
-
-  %h3 Photos
-  %p= link_to "Add Photos", new_sight_photo_path(@sight)
-
-  %p NEED A STRING OF PHOTO THUMBNAILS HERE
-
-  %h3 Reviews (#{@sight.reviews.count})
-  - @sight.reviews.each do |review|
-    %article.review
-      .row
-        .col-sm-2
-          %span Rating: #{review.rating} / 5
-          %p.row
-            by
-            = link_to review.creator.full_name, user_path(review.creator)
-        .col-sm-8
-          %p= review.content
-          - if current_user == review.creator
-            = link_to "Edit this review", edit_sight_review_path(@sight, review)
-
-  - if current_user
+  .center-block
     .row
-      .col-sm-10
+      %h1= @sight.name
+
+  .col-sm-4
+    %p
+      %strong Average Rating:
+      #{@sight.average_rating} /5
+    %p
+      %strong Category:
+      = @sight.category.name
+    %p
+      %strong Address:
+      = @sight.address
+    %p
+      %strong Description:
+      = @sight.description
+    %p
+      - if current_user
+        = link_to "+ I've visited this Sight", user_visited_sights_path(user_id: current_user.id, sight_id: @sight.id), method: :post, class: 'btn btn-primary'
+        %a.btn.btn-default{href: edit_sight_path(@sight), role: "button"} Edit this Sight
+
+  .col-sm-4
+    = image_tag @sight.photos.first.image_url(:medium) if @sight.photos.first
+  .col-sm-4
+    %p
+      = image_tag single_location_map_link(@sight.address)
+
+  .center-block
+    %h3 Photos
+    - @sight.photos.each do |photo|
+      = link_to image_tag(photo.image_url(:thumb)), sight_photo_path(@sight, photo)
+    %p= link_to "Add Photos", new_sight_photo_path(@sight)
+
+  .center-block
+    %h3 Reviews (#{@sight.reviews.count})
+    %dl.dl-horizontal
+      - @sight.reviews.each do |review|
+        .dt Rating: #{review.rating} / 5 by #{link_to review.creator.full_name, user_path(review.creator)}
+        .dd= review.content
+        // - if current_user == review.creator
+        //   = link_to "Edit this review", edit_sight_review_path(@sight, review)
+
+  .center-block
+    .col-sm-6.col-sm-offset-3
+      - if current_user
         = bootstrap_form_for [@sight, Review.new] do |f|
           %fieldset
             .form-group
-              %label.h3 Rate this Sight
-              .row
-                .col-sm-3
-                  = f.select :rating, options_for_sight_ratings
+              %h3 Rate this Sight
+              = f.select :rating, options_for_sight_ratings
             .form-group
               .row
-                .col-sm-8
-                  = f.text_area :content, label: "Write Review", rows: 6
+                = f.text_area :content, label: "Write Review", rows: 6
           %fieldset.form-group.actions.clearfix
-            = f.submit "Submit"
-            = link_to "Cancel", @sight
-  - else
-    %h4
-      = link_to "Sign in", sign_in_path
-      to add your review.
+            = f.submit "Add Review", class:"btn btn-primary"
+            = link_to "Cancel", @sight, class: "btn btn-default"
+      - else
+        %h4
+          = link_to "Sign in", sign_in_path
+          to add your review.

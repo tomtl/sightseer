@@ -49,7 +49,7 @@ describe PhotosController do
       end
 
       it "renders the new template" do
-        expect(Photo.count).to eq(1)
+        expect(response).to render_template :new
       end
     end
 
@@ -61,8 +61,19 @@ describe PhotosController do
         expect(Photo.count).to eq(0)
       end
 
-      it "sets the error message"
-      it "renders the new template"
+      it "sets the error message" do
+        set_current_user
+        photo_params = { description: "Photo of a place", image: "" }
+        post :create, sight_id: Fabricate(:sight), photo: photo_params
+        expect(flash[:danger]).to be_present
+      end
+
+      it "renders the new template" do
+        set_current_user
+        photo_params = { description: "Photo of a place", image: "" }
+        post :create, sight_id: Fabricate(:sight), photo: photo_params
+        expect(response).to render_template :new
+      end
     end
 
     context "for unauthenticated users" do

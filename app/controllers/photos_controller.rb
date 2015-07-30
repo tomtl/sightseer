@@ -12,9 +12,16 @@ class PhotosController < ApplicationController
     @photo.user = current_user
     @photo.sight = @sight
 
-    @photo.save
-    flash[:success] = "Your photo of #{@photo.sight.name} has been added successfully!"
-    render :new
+    if @photo.save
+      flash[:success] = "Your photo of #{@photo.sight.name} has been added successfully!"
+      redirect_to sight_path(@sight)
+    else
+      flash[:danger] = "Please fix the following errors"
+      render :new
+    end
+  end
+
+  def show
   end
 
   private

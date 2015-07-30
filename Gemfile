@@ -16,6 +16,7 @@ gem 'bcrypt'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'mini_magick'
+gem 'figaro'
 
 group :development, :test do
   gem 'pry'
