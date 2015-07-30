@@ -39,8 +39,8 @@
       - @sight.reviews.each do |review|
         .dt Rating: #{review.rating} / 5 by #{link_to review.creator.full_name, user_path(review.creator)}
         .dd= review.content
-        // - if current_user == review.creator
-        //   = link_to "Edit this review", edit_sight_review_path(@sight, review)
+        - if current_user == review.creator
+          = link_to "Edit this review", edit_sight_review_path(@sight, review)
 
   .center-block
     .col-sm-6.col-sm-offset-3

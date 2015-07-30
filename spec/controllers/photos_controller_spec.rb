@@ -25,7 +25,7 @@ describe PhotosController do
         set_current_user
         photo_params = {
           description: "Photo of a place",
-          image: "eiffel-tower-01.jpg"
+          image: fixture_file_upload("files/example.jpg")
         }
         post :create, sight_id: Fabricate(:sight), photo: photo_params
       end
@@ -42,14 +42,12 @@ describe PhotosController do
         expect(Photo.first.sight).to eq(Sight.first)
       end
 
-      it "generates a thumbnail"
-
       it "sets the success message" do
         expect(flash[:success]).to be_present
       end
 
       it "renders the new template" do
-        expect(response).to render_template :new
+        expect(response).to redirect_to sight_path(Sight.first)
       end
     end
 

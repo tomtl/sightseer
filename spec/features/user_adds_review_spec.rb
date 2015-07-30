@@ -36,7 +36,7 @@ feature "User creates a review" do
   def add_a_rating_and_review
     select "3 Stars", from: "Rating"
     fill_in "Write Review", with: "This place is pretty good."
-    click_button "Submit"
+    click_button "Add Review"
   end
 
   def expect_review_to_be_visible
