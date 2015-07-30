@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :require_user, except: [:show, :index]
+  before_action :require_user, except: [:show]
 
   def new
     @sight = Sight.find(params[:sight_id])
@@ -13,7 +13,8 @@ class PhotosController < ApplicationController
     @photo.sight = @sight
 
     if @photo.save
-      flash[:success] = "Your photo of #{@photo.sight.name} has been added successfully!"
+      flash[:success] =
+        "Your photo of #{@photo.sight.name} has been added successfully!"
       redirect_to sight_path(@sight)
     else
       flash[:danger] = "Please fix the following errors"

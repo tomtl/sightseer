@@ -91,7 +91,7 @@ describe PhotosController do
         sight_id: sight1.id,
         user_id: user1.id,
       )
-      photo1.save(:validate => false)
+      photo1.save(validate: false)
       get :show, sight_id: sight1.id, id: photo1.id
       expect(assigns(:photo)).to be_present
     end
