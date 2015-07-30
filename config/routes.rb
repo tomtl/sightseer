@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :sights, except: [:destroy] do
     resources :reviews, only: [:create, :edit, :update]
+    resources :photos, only: [:new, :create, :show]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
