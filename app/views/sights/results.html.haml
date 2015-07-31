@@ -1,0 +1,12 @@
+.container.sight
+  .center-block
+    %h1 Found Sights
+    - unless @sights.empty?
+      - @sights.each do |sight|
+        %p
+          %strong= link_to sight.name, sight_path(sight)
+          \ -
+          = sight.address
+    - else
+      %p No sights were found near this location.
+      = link_to "Want to add a sight?", new_sight_path
