@@ -24,7 +24,7 @@ class VisitedSightsController < ApplicationController
   def destroy
     @visited_sight = VisitedSight.find(params[:id])
     @visited_sight.destroy
-    flash.now[:success] = "The sight has been removed from your list successfully."
+    flash.now[:success] = "The sight has been removed from your list."
     redirect_to user_visited_sights_path(user_id: current_user.id)
   end
 

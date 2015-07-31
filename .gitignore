@@ -14,3 +14,6 @@
 
 # Ignore database settings as they vary between computers
 /config/database.yml
+
+# Ignore application configuration
+/config/application.yml

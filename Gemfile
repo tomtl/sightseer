@@ -13,6 +13,10 @@ gem 'bootstrap-sass'
 gem 'bootstrap_form'
 gem 'haml-rails'
 gem 'bcrypt'
+gem 'carrierwave'
+gem 'carrierwave-aws'
+gem 'mini_magick'
+gem 'figaro'
 
 group :development, :test do
   gem 'pry'

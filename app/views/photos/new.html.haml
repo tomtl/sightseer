@@ -1,0 +1,8 @@
+.container
+  %h1 Upload photo for #{@sight.name}
+  .col-md-6
+    = bootstrap_form_for [@sight, @photo] do |f|
+      = f.text_area :description, rows: 4
+      = f.file_field :image, class:"btn btn-file"
+      = f.submit "Add Photo", class:"btn btn-primary"
+      = link_to "Return to Sight", sight_path(@sight), class:"btn btn-default"
