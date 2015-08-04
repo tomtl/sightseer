@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   get "sign_out", to: "sessions#destroy"
 
   resources :sights, except: [:destroy] do
+    collection do
+      get :search, to: "sights#search"
+      post :search, to: "sights#results"
+    end
+
     resources :reviews, only: [:create, :edit, :update]
     resources :photos, only: [:new, :create, :show]
   end

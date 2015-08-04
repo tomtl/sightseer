@@ -1,0 +1,7 @@
+.container.sight
+  .center-block
+    %h1 Search for Sights
+    = form_tag({ controller: "sights", action: "search" }, method: "post") do
+      = label_tag(:location, "Near Location:")
+      = text_field_tag :location
+      = submit_tag("Search", class:"btn btn-primary")

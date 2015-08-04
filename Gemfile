@@ -17,6 +17,7 @@ gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'mini_magick'
 gem 'figaro'
+gem 'geocoder'
 
 group :development, :test do
   gem 'pry'
@@ -33,4 +34,6 @@ group :test do
   gem 'fabrication'
   gem 'faker'
   gem 'capybara'
+  gem 'vcr'
+  gem 'webmock'
 end
