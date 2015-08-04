@@ -140,19 +140,14 @@ describe SightsController do
   end
 
   describe "POST search" do
-    context "for successful search" do
-      it "finds the sight" do
-        sight1 = Fabricate(
-          :sight,
-          name: "Statue of Liberty",
-          address: "Statue of Liberty, NY, USA"
-        )
-        post :results, location: "New York, NY, USA"
-        expect(Sight.first.name).to eq(sight1.name)
-      end
-    end
-
-    context "for unsuccessful search" do
+    it "finds the sight" do
+      sight1 = Fabricate(
+        :sight,
+        name: "Statue of Liberty",
+        address: "Statue of Liberty, NY, USA"
+      )
+      post :results, location: "New York, NY, USA"
+      expect(Sight.first.name).to eq(sight1.name)
     end
   end
 end
