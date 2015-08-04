@@ -1,5 +1,5 @@
 class SightsController < ApplicationController
-  before_action :require_user, except: [:show, :index]
+  before_action :require_user, only: [:new, :create, :edit, :update]
   before_action :set_sight, only: [:show, :edit, :update]
 
   def new
@@ -35,6 +35,14 @@ class SightsController < ApplicationController
       flash.now[:danger] = "Please fix the following errors."
       render :edit
     end
+  end
+
+  def search
+  end
+
+  def results
+    location = params[:location]
+    @sights = Sight.near(location, 25)
   end
 
   private
