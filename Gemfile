@@ -34,4 +34,6 @@ group :test do
   gem 'fabrication'
   gem 'faker'
   gem 'capybara'
+  gem 'vcr'
+  gem 'webmock'
 end
