@@ -161,9 +161,9 @@ describe PhotosController do
         photo1.save(validate: false)
 
         post :update,
-          sight_id: sight1,
-          id: photo1,
-          photo: { description: "Updated description" }
+             sight_id: sight1,
+             id: photo1,
+             photo: { description: "Updated description" }
       end
 
       it "does not update the photo" do
