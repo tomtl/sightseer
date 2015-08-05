@@ -1,0 +1,7 @@
+.container
+  .center-block
+    %h1 Edit photo details
+    = image_tag @photo.image
+    = bootstrap_form_for [@photo.sight, @photo] do |f|
+      = f.text_area :description, rows: 4
+      = f.submit "Update Photo Description", class:"btn btn-primary"
