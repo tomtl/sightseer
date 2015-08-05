@@ -128,9 +128,9 @@ describe PhotosController do
         photo1.save(validate: false)
 
         post :update,
-          sight_id: sight1,
-          id: photo1,
-          photo: { description: "Updated description" }
+             sight_id: sight1,
+             id: photo1,
+             photo: { description: "Updated description" }
       end
 
       it "updates the photo" do
@@ -181,9 +181,9 @@ describe PhotosController do
     it_behaves_like "requires sign in" do
       let(:action) do
         post :update,
-          sight_id: 1,
-          id: 1,
-          photo: { description: "Updated description" }
+             sight_id: 1,
+             id: 1,
+             photo: { description: "Updated description" }
       end
     end
   end
