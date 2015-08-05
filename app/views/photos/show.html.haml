@@ -7,3 +7,6 @@
       = @photo.user.full_name
     %p
       = link_to "Return to Sight", sight_path(@photo.sight), class:"btn btn-primary"
+      = link_to "Edit Photo",
+        edit_sight_photo_path(@photo.sight, @photo), class:"btn btn-primary"
+

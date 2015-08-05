@@ -52,24 +52,21 @@ describe PhotosController do
     end
 
     context "for invalid inputs" do
-      it "does not create the photo" do
+      before do
         set_current_user
         photo_params = { description: "Photo of a place", image: "" }
         post :create, sight_id: Fabricate(:sight), photo: photo_params
+      end
+
+      it "does not create the photo" do
         expect(Photo.count).to eq(0)
       end
 
       it "sets the error message" do
-        set_current_user
-        photo_params = { description: "Photo of a place", image: "" }
-        post :create, sight_id: Fabricate(:sight), photo: photo_params
         expect(flash[:danger]).to be_present
       end
 
       it "renders the new template" do
-        set_current_user
-        photo_params = { description: "Photo of a place", image: "" }
-        post :create, sight_id: Fabricate(:sight), photo: photo_params
         expect(response).to render_template :new
       end
     end
@@ -94,6 +91,100 @@ describe PhotosController do
       photo1.save(validate: false)
       get :show, sight_id: sight1.id, id: photo1.id
       expect(assigns(:photo)).to be_present
+    end
+  end
+
+  describe "GET edit" do
+    it "sets @photo" do
+      set_current_user
+      sight1 = Fabricate(:sight)
+      photo1 = Photo.new(
+        description: "Here is description",
+        sight_id: sight1.id,
+        user_id: 1,
+      )
+      photo1.save(validate: false)
+      get :edit, sight_id: sight1, id: photo1
+      expect(assigns(:photo)).to eq(photo1)
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) { get :edit, sight_id: 1, id: 1 }
+    end
+  end
+
+  describe "POST update" do
+    context "for valid inputs" do
+      let(:sight1) { Fabricate(:sight) }
+
+      before do
+        user1 = Fabricate(:user)
+        set_current_user(user1)
+        photo1 = Photo.new(
+          description: "Original description",
+          sight_id: sight1.id,
+          user_id: user1.id,
+        )
+        photo1.save(validate: false)
+
+        post :update,
+          sight_id: sight1,
+          id: photo1,
+          photo: { description: "Updated description" }
+      end
+
+      it "updates the photo" do
+        expect(Photo.first.description).to eq("Updated description")
+      end
+
+      it "sets the success message" do
+        expect(flash[:success]).to be_present
+      end
+
+      it "redirects to the sight page" do
+        expect(response).to redirect_to sight_path(sight1)
+      end
+    end
+
+    context "for a user that did not create the photo" do
+      let(:sight1) { Fabricate(:sight) }
+
+      before do
+        photo_creator = Fabricate(:user)
+        another_user = Fabricate(:user)
+        set_current_user(another_user)
+        photo1 = Photo.new(
+          description: "Original description",
+          sight_id: sight1.id,
+          user_id: photo_creator.id,
+        )
+        photo1.save(validate: false)
+
+        post :update,
+          sight_id: sight1,
+          id: photo1,
+          photo: { description: "Updated description" }
+      end
+
+      it "does not update the photo" do
+        expect(Photo.first.description).to eq("Original description")
+      end
+
+      it "sets the error message" do
+        expect(flash[:danger]).to be_present
+      end
+      it "redirects_to the sight page" do
+        expect(response).to redirect_to sight_path(sight1)
+      end
+    end
+
+    it_behaves_like "requires sign in" do
+      let(:action) do
+        post :update,
+          sight_id: 1,
+          id: 1,
+          photo: { description: "Updated description" }
+      end
     end
   end
 end
