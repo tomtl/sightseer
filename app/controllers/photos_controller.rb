@@ -34,7 +34,7 @@ class PhotosController < ApplicationController
   def update
     @photo.update(edit_photo_params)
     flash[:success] = "The photo has been updated."
-    redirect_to sight_path(@photo.sight)
+    redirect_to sight_photo_path(@photo.sight, @photo)
   end
 
   private

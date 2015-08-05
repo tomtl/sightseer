@@ -141,8 +141,8 @@ describe PhotosController do
         expect(flash[:success]).to be_present
       end
 
-      it "redirects to the sight page" do
-        expect(response).to redirect_to sight_path(sight1)
+      it "redirects to the photo page" do
+        expect(response).to redirect_to sight_photo_path(sight1, Photo.first)
       end
     end
 

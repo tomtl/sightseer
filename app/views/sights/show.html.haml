@@ -22,7 +22,9 @@
         %a.btn.btn-default{href: edit_sight_path(@sight), role: "button"} Edit this Sight
 
   .col-sm-4
-    = image_tag @sight.photos.first.image_url(:medium) if @sight.photos.first
+    - if @sight.photos.first
+      = link_to image_tag(@sight.photos.first.image_url(:medium)),
+        sight_photo_path(@sight, @sight.photos.first)
   .col-sm-4
     %p
       = image_tag single_location_map_link(@sight.address)
