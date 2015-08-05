@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
 
     resources :reviews, only: [:create, :edit, :update]
-    resources :photos, only: [:new, :create, :show]
+    resources :photos, only: [:new, :create, :show, :edit, :update]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
