@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   def reviewed_sight?(sight)
     !!sight_review(sight)
   end
+
+  def generate_token!
+    update_column(:token, SecureRandom.urlsafe_base64)
+  end
 end

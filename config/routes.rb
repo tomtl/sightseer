@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     resources :photos, only: [:new, :create, :show, :edit, :update]
   end
 
+  resources :forgot_passwords, only: [:create]
+  get "forgot_password", to: "forgot_passwords#new"
+  get "forgot_password_confirmation", to: "forgot_passwords#confirm"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
