@@ -12,6 +12,7 @@ Capybara.server_port = 52662
 
 Capybara::Webkit.configure do |config|
   config.allow_url("www.gravatar.com")
+  config.allow.url("www.maps.google.com")
 end
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
