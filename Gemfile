@@ -37,3 +37,7 @@ group :test do
   gem 'vcr'
   gem 'webmock'
 end
+
+group :development do
+  gem 'letter_opener_web', '~> 1.2.0'
+end
