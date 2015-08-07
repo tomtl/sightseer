@@ -36,4 +36,10 @@ group :test do
   gem 'capybara'
   gem 'vcr'
   gem 'webmock'
+  gem 'launchy'
+  gem 'capybara-email', github: 'dockyard/capybara-email'
+end
+
+group :development do
+  gem 'letter_opener_web', '~> 1.2.0'
 end

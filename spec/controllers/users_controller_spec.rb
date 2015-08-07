@@ -59,8 +59,20 @@ describe UsersController do
 
   describe "POST update" do
     context "with valid input" do
-      let(:user1) { Fabricate(:user, email: "robert@original_email.com") }
-      before { post :update, id: user1.id, user: { email: "bob@example.com" } }
+      let(:user1) do
+        Fabricate(
+          :user,
+          email: "robert@original_email.com",
+          password: "password"
+        )
+      end
+
+      before do
+        post :update, id: user1.id, user: {
+          email: "bob@example.com",
+          password: "password"
+        }
+      end
 
       it "updates the user" do
         expect(User.first.email).to eq("bob@example.com")
