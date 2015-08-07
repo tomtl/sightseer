@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/dockyard/capybara-email.git
+  revision: 76a78f16475faf429315d59deb756b42cd6337c3
+  specs:
+    capybara-email (2.4.0)
+      capybara (~> 2.4)
+      mail
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -226,6 +234,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap_form
   capybara
+  capybara-email!
   carrierwave
   carrierwave-aws
   coffee-rails (~> 4.1.0)
@@ -237,6 +246,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  launchy
   letter_opener_web (~> 1.2.0)
   mini_magick
   pg
