@@ -6,6 +6,14 @@ require "capybara/rails"
 require "capybara/email/rspec"
 require "vcr"
 
+
+Capybara.javascript_driver = :webkit
+Capybara.server_port = 52662
+
+Capybara::Webkit.configure do |config|
+  config.allow_url("www.gravatar.com")
+end
+
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
@@ -23,10 +31,17 @@ end
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
   config.infer_spec_type_from_file_location!
+
+  # Database cleaner config
+  config.before(:suite) { DatabaseCleaner.clean_with(:truncation) }
+  config.before(:each) { DatabaseCleaner.strategy = :transaction }
+  config.before(:each, js: true) { DatabaseCleaner.strategy = :truncation }
+  config.before(:each) { DatabaseCleaner.start }
+  config.after(:each) { DatabaseCleaner.clean }
 end
 
 Geocoder.configure(lookup: :test)

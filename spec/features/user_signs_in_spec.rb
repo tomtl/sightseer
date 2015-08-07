@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "User signs in" do
+feature "User signs in", :js do
   scenario "user signing in" do
     user1 = Fabricate(:user)
     visit root_path

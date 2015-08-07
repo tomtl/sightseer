@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "User creates a review" do
+feature "User creates a review", :js do
   scenario "for authenticated user" do
     user1 = Fabricate(:user)
     sight1 = Fabricate(:sight, category: Fabricate(:category))
