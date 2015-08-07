@@ -49,7 +49,7 @@ describe PasswordResetsController do
 
     context "with invalid token" do
       before do
-        user1 = Fabricate(:user)
+        Fabricate(:user)
         post :create, password: "new_password", token: "12345"
       end
 
