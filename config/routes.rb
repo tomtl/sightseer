@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'pages#front'
   get "home", to: "sights#index"
+  get "about", to: "pages#about"
+  get "contact", to: "pages#contact"
 
   resources :users, only: [:new, :create, :edit, :update] do
     resources :visited_sights, only: [:create, :index, :destroy]
@@ -18,17 +20,6 @@ Rails.application.routes.draw do
 
     resources :reviews, only: [:create, :edit, :update]
     resources :photos, only: [:new, :create, :show, :edit, :update]
-  end
-
-  resources :forgot_passwords, only: [:create]
-  get "forgot_password", to: "forgot_passwords#new"
-  get "forgot_password_confirmation", to: "forgot_passwords#confirm"
-
-  resources :password_resets, only: [:show, :create]
-  get "expired_token", to: "pages#expired_token"
-
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
