@@ -6,7 +6,6 @@ require "capybara/rails"
 require "capybara/email/rspec"
 require "vcr"
 
-
 Capybara.javascript_driver = :webkit
 Capybara.server_port = 52662
 
