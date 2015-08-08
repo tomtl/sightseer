@@ -19,4 +19,20 @@ module ApplicationHelper
   def rating_values_list
     [5, 4, 3, 2, 1].map { |number| [pluralize(number, "Star"), number] }
   end
+
+  def photos_exist?
+    !Photo.all.empty?
+  end
+
+  def sight_has_photos?(sight)
+    sight.has_photos?
+  end
+
+  def last_sight
+    last_sight ||= Sight.last
+  end
+
+  def last_photo
+    last_photo ||= Photo.last
+  end
 end

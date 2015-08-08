@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "User adds sight", :js do
+feature "User adds sight" do
   scenario "for authenticated user" do
     user1 = Fabricate(:user)
     sign_in(user1)

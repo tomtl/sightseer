@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Signing up", :js do
+feature "Signing up" do
   scenario "Sign up" do
     visit root_path
     click_link "Sign Up"
