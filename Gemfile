@@ -38,6 +38,8 @@ group :test do
   gem 'webmock'
   gem 'launchy'
   gem 'capybara-email', github: 'dockyard/capybara-email'
+  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
 end
 
 group :development do

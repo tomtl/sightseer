@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  root 'pages#front'
+  root "pages#front"
   get "home", to: "sights#index"
+  get "about", to: "pages#about"
+  get "contact", to: "pages#contact"
 
   resources :users, only: [:new, :create, :edit, :update] do
     resources :visited_sights, only: [:create, :index, :destroy]

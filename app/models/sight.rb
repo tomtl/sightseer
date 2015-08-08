@@ -14,4 +14,12 @@ class Sight < ActiveRecord::Base
   def average_rating
     reviews.average(:rating).round(1) if reviews.average(:rating)
   end
+
+  def has_photos?
+    !photos.empty?
+  end
+
+  def standard_photo
+    photos.first.image_url(:medium) unless photos.empty?
+  end
 end

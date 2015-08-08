@@ -21,18 +21,12 @@
               %a{:href => "#"} Find by sight name
             %li
               %a{href: search_sights_path} Find sights near a location
-            %li.divider{:role => "separator"}
-            %li.dropdown-header Nav header
-            %li
-              %a{:href => "#"} Separated link
-            %li
-              %a{:href => "#"} One more separated link
         %li
           %a{href: new_sight_path} Add a Sight
         %li
-          %a{:href => "#about"} About
+          %a{href: about_path} About
         %li
-          %a{:href => "#contact"} Contact
+          %a{href: contact_path} Contact
 
       - if current_user
         %ul.nav.navbar-nav.navbar-right
@@ -45,8 +39,6 @@
                 %a{href: user_visited_sights_path(user_id: current_user.id)} Sights I've Visited
               %li
                 %a{href: "#"} Account
-              %li
-                %a{href: "#"} Plan and billing
               %li.divider{:role => "separator"}
               %li
                 %a{href: sign_out_path} Sign Out
