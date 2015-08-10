@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :reviews
   has_many :visited_sights
+  has_many :photos
 
   validates :email, presence: true, uniqueness: true
   validates :full_name, presence: true
@@ -22,5 +23,17 @@ class User < ActiveRecord::Base
 
   def delete_token!
     update_column(:token, nil)
+  end
+
+  def has_reviews?
+    !reviews.empty?
+  end
+
+  def has_visited_sights?
+    !visited_sights.empty?
+  end
+
+  def has_photos?
+    !photos.empty?
   end
 end

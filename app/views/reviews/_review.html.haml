@@ -1,0 +1,5 @@
+%p
+  = "Rating: #{review.rating} /5 - "
+  = review.content
+  - if current_user == review.creator
+    = link_to "(Edit this review)", edit_sight_review_path(review.sight, review)

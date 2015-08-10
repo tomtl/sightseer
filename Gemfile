@@ -18,6 +18,7 @@ gem 'carrierwave-aws'
 gem 'mini_magick'
 gem 'figaro'
 gem 'geocoder'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'pry'
