@@ -19,9 +19,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @reviews = @user.reviews
-    @visited_sights = @user.visited_sights
-    @photos = @user.photos
+    @reviews = @user.reviews.paginate(page: params[:page])
+    @visited_sights = @user.visited_sights.paginate(page: params[:page])
+    @photos = @user.photos.paginate(page: params[:page], per_page: 10)
   end
 
   def edit

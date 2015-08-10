@@ -15,6 +15,7 @@
       - @reviews.each do |review|
         %h4= link_to review.sight.name, sight_path(review.sight)
         = render "reviews/review", review: review
+      = will_paginate @reviews
 
   - elsif params[:tab] == 'visited_sights'
     - if @user.has_visited_sights?
@@ -23,8 +24,10 @@
         - if @user.reviewed_sight?(visited_sight.sight)
           = "#{@user.full_name}'s review:"
           = render "reviews/review", review: @user.sight_review(visited_sight.sight)
+      = will_paginate @visited_sights
 
   - elsif params[:tab] == 'photos'
     - if @user.has_photos?
       - @photos.each do |photo|
         = link_to((image_tag photo.image_url(:thumb)), sight_photo_path(photo.sight, photo))
+      = will_paginate @photos
