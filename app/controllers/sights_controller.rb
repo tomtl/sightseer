@@ -18,7 +18,7 @@ class SightsController < ApplicationController
   end
 
   def index
-    @sights = Sight.all
+    @sights = Sight.all.paginate(page: params[:page])
   end
 
   def show
@@ -42,7 +42,7 @@ class SightsController < ApplicationController
 
   def results
     location = params[:location]
-    @sights = Sight.near(location, 25)
+    @sights = Sight.near(location, 25).paginate(page: params[:page])
   end
 
   private

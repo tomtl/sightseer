@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"
 
-  resources :users, only: [:new, :create, :edit, :update] do
+  resources :users, except: [:index, :destroy] do
     resources :visited_sights, only: [:create, :index, :destroy]
   end
 
