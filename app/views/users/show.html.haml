@@ -1,0 +1,30 @@
+.container.user
+  .center-block
+    %h1= @user.full_name
+
+  %ul.nav.nav-tabs
+    <li class='#{'active' if params[:tab].nil?}'>
+    \#{link_to "Reviews (#{@reviews.size})", user_path(@user)}
+    <li class='#{'active' if params[:tab] == 'visited_sights'}'>
+    \#{link_to "Visited Sights (#{@visited_sights.size})", user_path(@user, tab: 'visited_sights')}
+    <li class='#{'active' if params[:tab] == 'photos'}'>
+    \#{link_to "Photos (#{@photos.size})", user_path(@user, tab: 'photos')}
+
+  - if params[:tab].nil?
+    - if @user.has_reviews?
+      - @reviews.each do |review|
+        %h4= link_to review.sight.name, sight_path(review.sight)
+        = render "reviews/review", review: review
+
+  - elsif params[:tab] == 'visited_sights'
+    - if @user.has_visited_sights?
+      - @visited_sights.each do |visited_sight|
+        %h4= link_to visited_sight.sight.name, sight_path(visited_sight.sight)
+        - if @user.reviewed_sight?(visited_sight.sight)
+          = "#{@user.full_name}'s review:"
+          = render "reviews/review", review: @user.sight_review(visited_sight.sight)
+
+  - elsif params[:tab] == 'photos'
+    - if @user.has_photos?
+      - @photos.each do |photo|
+        = link_to((image_tag photo.image_url(:thumb)), sight_photo_path(photo.sight, photo))

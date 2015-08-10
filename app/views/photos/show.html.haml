@@ -4,10 +4,9 @@
     %p
       = @photo.description
       Added by:
-      = @photo.user.full_name
+      = link_to @photo.user.full_name, user_path(@photo.user)
     %p
       = link_to "Return to Sight", sight_path(@photo.sight),
         class:"btn btn-primary"
       = link_to "Edit Photo",
         edit_sight_photo_path(@photo.sight, @photo), class:"btn btn-primary"
-

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
 
   def new
     @user = User.new
@@ -16,6 +16,12 @@ class UsersController < ApplicationController
       flash.now[:danger] = "Please fix the following errors."
       render :new
     end
+  end
+
+  def show
+    @reviews = @user.reviews
+    @visited_sights = @user.visited_sights
+    @photos = @user.photos
   end
 
   def edit

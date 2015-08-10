@@ -38,7 +38,7 @@
               %li
                 %a{href: user_visited_sights_path(user_id: current_user.id)} Sights I've Visited
               %li
-                %a{href: "#"} Account
+                %a{href: user_path(current_user)} My Profile
               %li.divider{:role => "separator"}
               %li
                 %a{href: sign_out_path} Sign Out
