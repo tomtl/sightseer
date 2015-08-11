@@ -21,14 +21,20 @@
         = link_to "+ I've visited this Sight", user_visited_sights_path(user_id: current_user.id, sight_id: @sight.id), method: :post, class: 'btn btn-primary'
         %a.btn.btn-default{href: edit_sight_path(@sight), role: "button"} Edit this Sight
 
+  -# main photo
   .col-sm-4
     - if @sight.photos.first
-      = link_to image_tag(@sight.standard_photo),
-        sight_photo_path(@sight, @sight.photos.first)
+      %a{"data-lightbox" => "image-1",
+        "data-title" => "#{@sight.photos.first.description} - Added by: #{link_to @sight.photos.first.user.full_name, user_path(@sight.photos.first.user)}",
+        href: @sight.photos.first.image}
+        = image_tag @sight.standard_photo
+
+  -# location map
   .col-sm-4
     %p
       = image_tag single_location_map_link(@sight.address)
 
+  -# thumbnails
   .center-block
     %h3 Photos
     - @sight.photos.each do |photo|
