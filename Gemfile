@@ -19,6 +19,7 @@ gem 'mini_magick'
 gem 'figaro'
 gem 'geocoder'
 gem 'will_paginate'
+gem 'lightbox2-rails'
 
 group :development, :test do
   gem 'pry'
