@@ -3,6 +3,11 @@
 
   - @sights.each do |sight|
     %p
+      - if sight.has_photos?
+        = link_to (image_tag sight.standard_thumb), sight_path(sight)
+      - else
+        = link_to (image_tag "/images/blank_thumb.png"), sight_path(sight)
+
       %strong= link_to sight.name, sight_path(sight)
       \ -
       = sight.address

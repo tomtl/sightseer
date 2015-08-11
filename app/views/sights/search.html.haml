@@ -1,6 +1,8 @@
 .container.sight
   .center-block
     %h1 Search for Sights
+    %p
+      %em Search for sights that are near a location or city.
     = form_tag({ controller: "sights", action: "search" }, method: "post") do
       = label_tag(:location, "Near Location:")
       = text_field_tag :location

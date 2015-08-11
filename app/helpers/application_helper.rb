@@ -5,8 +5,9 @@ module ApplicationHelper
   end
 
   def options_for_categories
+    categories = Category.all.order(:name)
     options_for_select(
-      Category.all.map { |category| [category.name, category.id] }
+      categories.map { |category| [category.name, category.id] }
     )
   end
 

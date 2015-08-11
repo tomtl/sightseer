@@ -12,15 +12,17 @@
       %ul.nav.navbar-nav
         %li
           %a{href: sights_path} Sights
-        %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            Search for Sights
-            %span.caret
-          %ul.dropdown-menu
-            %li
-              %a{:href => "#"} Find by sight name
-            %li
-              %a{href: search_sights_path} Find sights near a location
+        %li
+          %a{href: search_sights_path} Find Sights
+        // %li.dropdown
+        //   %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+        //     Search for Sights
+        //     %span.caret
+        //   %ul.dropdown-menu
+        //     %li
+        //       %a{:href => "#"} Find by sight name
+        //     %li
+        //       %a{href: search_sights_path} Find sights near a location
         %li
           %a{href: new_sight_path} Add a Sight
         %li
