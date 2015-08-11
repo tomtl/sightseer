@@ -12,12 +12,12 @@
         .item.active
           - if sight_has_photos?(last_sight)
             %a{href: sight_path(last_sight)}
-              %img{alt:"#{last_sight.name}", src:"#{last_sight.standard_photo}", align:"middle"}
+              %img{alt:"#{@last_sight.name}", src:"#{@last_sight.standard_photo}", align:"middle"}
               .carousel-caption
                 = last_sight.name
           - else
             %a{href: sight_path(last_photo.sight)}
-              %img{alt:"#{last_photo.sight.name}", src:"#{last_photo.image_url(:medium)}", align:"middle"}
+              %img{alt:"#{@last_photo.sight.name}", src:"#{@last_photo.medium_url}", align:"middle"}
               .carousel-caption
                 = last_photo.sight.name
         - @sights.each do |sight|

@@ -23,7 +23,7 @@
 
   .col-sm-4
     - if @sight.photos.first
-      = link_to image_tag(@sight.photos.first.image_url(:medium)),
+      = link_to image_tag(@sight.standard_photo),
         sight_photo_path(@sight, @sight.photos.first)
   .col-sm-4
     %p
@@ -32,7 +32,7 @@
   .center-block
     %h3 Photos
     - @sight.photos.each do |photo|
-      = link_to image_tag(photo.image_url(:thumb)), sight_photo_path(@sight, photo)
+      = link_to image_tag(photo.thumb_url), sight_photo_path(@sight, photo)
     %p= link_to "Add Photos", new_sight_photo_path(@sight)
 
   .center-block
