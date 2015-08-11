@@ -17,6 +17,6 @@ class Photo < ActiveRecord::Base
   private
 
   def s3_path
-    "https://#{ENV["S3_BUCKET_NAME"]}.s3.amazonaws.com/uploads/"
+    "https://#{ENV['S3_BUCKET_NAME']}.s3.amazonaws.com/uploads/"
   end
 end
