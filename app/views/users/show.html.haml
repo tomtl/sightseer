@@ -29,5 +29,6 @@
   - elsif params[:tab] == 'photos'
     - if @user.has_photos?
       - @photos.each do |photo|
-        = link_to((image_tag photo.image_url(:thumb)), sight_photo_path(photo.sight, photo))
+        = link_to((image_tag photo.thumb_url),
+          sight_photo_path(photo.sight, photo))
       = will_paginate @photos

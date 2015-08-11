@@ -30,10 +30,10 @@ module ApplicationHelper
   end
 
   def last_sight
-    last_sight ||= Sight.last
+    @last_sight ||= Sight.last
   end
 
   def last_photo
-    last_photo ||= Photo.last
+    @last_photo ||= Photo.last
   end
 end
