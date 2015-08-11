@@ -124,6 +124,8 @@ GEM
     letter_opener_web (1.2.3)
       letter_opener (~> 1.0)
       rails (>= 3.2)
+    lightbox2-rails (2.7.1)
+      railties (>= 3.1)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -263,6 +265,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   letter_opener_web (~> 1.2.0)
+  lightbox2-rails
   mini_magick
   pg
   pry
@@ -279,3 +282,6 @@ DEPENDENCIES
   web-console (~> 2.0)
   webmock
   will_paginate
+
+BUNDLED WITH
+   1.10.5
