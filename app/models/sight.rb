@@ -22,4 +22,8 @@ class Sight < ActiveRecord::Base
   def standard_photo
     photos.first.image_url(:medium) unless photos.empty?
   end
+
+  def standard_thumb
+    photos.first.image_url(:thumb) unless photos.empty?
+  end
 end
