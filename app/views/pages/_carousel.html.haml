@@ -12,7 +12,7 @@
         .item.active
           - if sight_has_photos?(last_sight)
             %a{href: sight_path(last_sight)}
-              %img{alt:"#{@last_sight.name}", src:"#{@last_sight.standard_photo}", align:"middle"}
+              %img{alt:"#{@last_sight.name}", src:"#{@last_sight.main_photo.medium_url}", align:"middle"}
               .carousel-caption
                 = last_sight.name
           - else
@@ -24,7 +24,7 @@
           - if sight_has_photos?(sight)
             .item
               %a{href: "#{sight_path(sight)}"}
-                %img{alt:"#{sight.name}", src:"#{sight.standard_photo}", align:"middle"}
+                %img{alt:"#{sight.name}", src:"#{sight.main_photo.medium_url}", align:"middle"}
                 .carousel-caption
                   = sight.name
 
