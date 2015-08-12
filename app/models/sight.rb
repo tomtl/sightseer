@@ -16,20 +16,10 @@ class Sight < ActiveRecord::Base
   end
 
   def has_photos?
-    !photos.empty?
+    photos.present?
   end
 
-  def standard_photo
-    "#{s3_path}medium_#{photos.first.image_identifier}?" unless photos.empty?
-  end
-
-  def standard_thumb
-    "#{s3_path}thumb_#{photos.first.image_identifier}?" unless photos.empty?
-  end
-
-  private
-
-  def s3_path
-    "https://#{ENV['S3_BUCKET_NAME']}.s3.amazonaws.com/uploads/"
+  def main_photo
+    photos.first
   end
 end

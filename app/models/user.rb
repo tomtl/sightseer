@@ -26,14 +26,14 @@ class User < ActiveRecord::Base
   end
 
   def has_reviews?
-    !reviews.empty?
+    reviews.present?
   end
 
   def has_visited_sights?
-    !visited_sights.empty?
+    visited_sights.present?
   end
 
   def has_photos?
-    !photos.empty?
+    photos.present?
   end
 end

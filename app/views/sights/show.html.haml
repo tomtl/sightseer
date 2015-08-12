@@ -25,9 +25,9 @@
   .col-sm-4
     - if @sight.photos.first
       %a{"data-lightbox" => "image-1",
-        "data-title" => "#{@sight.photos.first.description} - Added by: #{link_to @sight.photos.first.user.full_name, user_path(@sight.photos.first.user)}",
-        href: @sight.photos.first.image}
-        = image_tag @sight.standard_photo
+        "data-title" => "#{@sight.main_photo.description} - Added by: #{link_to @sight.main_photo.user.full_name, user_path(@sight.main_photo.user)}",
+        href: @sight.main_photo.fullsize_url}
+        = image_tag @sight.main_photo.medium_url
 
   -# location map
   .col-sm-4
@@ -38,9 +38,9 @@
   .center-block
     %h3 Photos
     - @sight.photos.each do |photo|
-      %a{"data-lightbox" => "#{photo.id}",
-        "data-title" => "#{photo.description} - Added by: #{link_to photo.user.full_name, user_path(photo.user)} #{link_to '(Edit Photo)', edit_sight_photo_path(@sight, photo)}",
-        href: photo.image}
+      %a{"data-lightbox" => "sight-thumbnails",
+        "data-title" => "#{photo.description} - Added by: #{link_to photo.user.full_name, user_path(photo.user)}",
+        href: photo.fullsize_url}
         = image_tag photo.thumb_url
     %p= link_to "Add Photos", new_sight_photo_path(@sight)
 

@@ -6,6 +6,10 @@ class Photo < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  def fullsize_url
+    "#{s3_path}#{image_identifier}?"
+  end
+
   def medium_url
     "#{s3_path}medium_#{image_identifier}?"
   end
